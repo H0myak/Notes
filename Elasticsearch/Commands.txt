@@ -1,0 +1,8 @@
+Show cluster status
+  curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
+Show shards status
+  curl http://localhost:9200/_cat/shards?v
+Show recovery status
+  curl -XGET 'http://localhost:9200/_recovery?pretty=true'
+If you have some trouble with shards, use this:
+  curl -XGET 'http://localhost:9200/_cluster/allocation/explain?pretty'
