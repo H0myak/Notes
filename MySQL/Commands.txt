@@ -1,0 +1,6 @@
+Set security policy
+  SET GLOBAL validate_password_policy=LOW;
+Uninstall validate password plugin
+  uninstall plugin validate_password;
+Change password for some user (root for example)
+  ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_pass';
