@@ -6,3 +6,5 @@ Show recovery status
   curl -XGET 'http://localhost:9200/_recovery?pretty=true'
 If you have some trouble with shards, use this:
   curl -XGET 'http://localhost:9200/_cluster/allocation/explain?pretty'
+Show index status
+curl 'localhost:9200/_cat/indices?v'

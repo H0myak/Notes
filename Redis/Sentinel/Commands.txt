@@ -1,0 +1,6 @@
+# Sentinel config file:
+  sentinel monitor <some name> <master ip> <master port> <number of sentinel node for quorum>
+  sentinel down-after-milliseconds mymaster 60000
+  sentinel failover-timeout mymaster 180000
+  sentinel parallel-syncs mymaster 1
+  requirepass "your_password_here"

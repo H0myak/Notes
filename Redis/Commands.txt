@@ -1,0 +1,4 @@
+# Connect to the 
+# Promote slave node to master:
+  SLAVEOF NO ONE
+#

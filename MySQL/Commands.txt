@@ -4,3 +4,14 @@ Uninstall validate password plugin
   uninstall plugin validate_password;
 Change password for some user (root for example)
   ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_pass';
+Show buffer pool size
+  SELECT @@innodb_buffer_pool_size;
+Set buffer pool size
+  SET GLOBAL innodb_buffer_pool_size=<size in bytes>;
+
+  на отправляющей стороне в директтории /var/lib/mysql: 
+  innobackupex --slave-info --stream=tar ./ | gzip | pv > /dev/tcp/10.2.1.201/3306
+  тут соответственно нужны ip и port принимащей стороны
+
+  на принимающей стороне в директтории /var/lib/mysql:
+  nc -l 3306 | tar -zxv

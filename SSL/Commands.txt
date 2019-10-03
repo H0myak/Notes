@@ -1,0 +1,2 @@
+# Show info about cert
+  openssl x509 -in ssl.crt -text -noout
