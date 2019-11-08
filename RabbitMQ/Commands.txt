@@ -1,0 +1,7 @@
+# Remove node from cluster (when node present in cluster). All commands need started on on node who need to remove:
+  rabbitmqctl stop_app
+  rabbitmqctl reset
+  rabbitmqctl start_app
+
+# Remove node from cluster (when node is dead and newer come back)
+  rabbitmqctl force

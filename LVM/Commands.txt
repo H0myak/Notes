@@ -1,0 +1,11 @@
+определяем имя интересующего нас физического раздела LVM (параметр "PV Name")
+sudo pvdisplay
+выводим информацию о распределении выделенных физических областей по разделу
+sudo pvs --verbose --segments /dev/sda5
+перемещаем выделенные физические области так, чтобы между ними не было свободного пространства
+sudo pvmove --alloc anywhere /dev/sda5:2370-2497
+уменьшаем размер раздела; в качестве нового размера указываем ОБЪЕМ_ЗАНЯТЫХ_ОБЛАСТЕЙ (параметр "Allocated PE") * РАЗМЕР_ОБЛАСТИ (параметр "PE Size") + 1
+sudo pvresize /dev/sda5 --setphysicalvolumesize 3517M
+
+
+https://www.galkov.pro/decrease_drive_partition_size_on_linux/
