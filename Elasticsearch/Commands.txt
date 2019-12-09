@@ -1,10 +1,28 @@
-Show cluster status
+# Show cluster status
+####
   curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
-Show shards status
+# Show shards status
+####
   curl http://localhost:9200/_cat/shards?v
-Show recovery status
+# Show recovery status
+####
   curl -XGET 'http://localhost:9200/_recovery?pretty=true'
-If you have some trouble with shards, use this:
+# If you have some trouble with shards, use this:
+####
   curl -XGET 'http://localhost:9200/_cluster/allocation/explain?pretty'
-Show index status
-curl 'localhost:9200/_cat/indices?v'
+# Show index status
+####
+  curl 'localhost:9200/_cat/indices?v'
+# Add node to excluded. Nead for drain node from the cluster.
+####
+  curl -X PUT localhost:9200/_cluster/settings -H 'Content-Type: application/json' -d '{
+    "transient" :{
+      "cluster.routing.allocation.exclude._ip" : ""
+    }
+  }'
+
+  curl -X PUT localhost:9200/_cluster/settings -H 'Content-Type: application/json' -d '{
+    "transient" :{
+      "cluster.routing.allocation.exclude._ip" : "192.168.25.10"
+    }
+  }'

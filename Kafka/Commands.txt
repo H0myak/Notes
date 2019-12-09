@@ -1,0 +1,19 @@
+# In all examples $(hostname -f)  = zookeeper host
+
+# List all topics in kafka
+  kafka-topics --zookeeper $(hostname -f) --list
+
+# Full info about topics
+  kafka-topics --zookeeper $(hostname -f) --describe
+
+# Create topic
+  kafka-topics --create --zookeeper $(hostname -f) --topic <topic-name> --partitions <number-of-partitions> --replication-factor <number-of-replicating-servers>
+
+# Change some parametr of topic
+  kafka-topics --zookeeper $(hostname -f) --alter --topic <topic-name> [ (--replication-factor <number-of-replicating-servers> ) or (--partitions <number-of-partitions> )]
+
+# Write to topic
+  kafka-console-producer --broker-list localhost:9092 --topic <topic-name>
+
+# Read from topic
+  kafka-console-consumer --bootstrap-server localhost:9092 --topic <topic-name> --from-beginning
