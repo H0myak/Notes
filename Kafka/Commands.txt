@@ -12,6 +12,9 @@
 # Change some parametr of topic
   kafka-topics --zookeeper $(hostname -f) --alter --topic <topic-name> [ (--replication-factor <number-of-replicating-servers> ) or (--partitions <number-of-partitions> )]
 
+# Drop topic
+  kafka-topics --zookeeper $(hostname -f) --delete --topic <topic-name>
+
 # Write to topic
   kafka-console-producer --broker-list localhost:9092 --topic <topic-name>
 
