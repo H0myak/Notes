@@ -1,0 +1,2 @@
+# Search user in LDAP
+  ldapsearch -LLL -ZZ -h ipa.hwtool.net -W -x -D uid=aleksandr.yurchenko,cn=users,cn=accounts,dc=hwtool,dc=net -b "cn=accounts,dc=hwtool,dc=net" "(MemberOf=cn=users,cn=accounts,dc=hwtool,dc=net)" uid 
