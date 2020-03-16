@@ -27,44 +27,27 @@
     }
   }'
 
-# Add S3 credentials into elastic keystore
-####
-/usr/share/elasticsearch/bin/elasticsearch-keystore add s3.client.default.access_key
-/usr/share/elasticsearch/bin/elasticsearch-keystore add s3.client.default.secret_key
 
-# reload secure settings
-curl POST http://127.0.0.1:9200/_nodes/reload_secure_settings
+  curl -X PUT localhost:9200/_cluster/settings -H 'Content-Type: application/json' -d '{
+  "transient" : {
+  "cluster.routing.allocation.disk.watermark.flood_stage" : "99%",
+  "cluster.routing.allocation.disk.watermark.high" : "97%",
+  "cluster.routing.allocation.disk.watermark.low" : "95%
+  }
+  }'
 
-# Configure repository for s3 backup
-####
-curl -XPUT http://127.0.0.1:9200/_snapshot/<name of s3 repo>?pretty -H 'Content-Type: application/json' -d '
+  curl -XPUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
 {
-  "type": "s3",
-  "settings": {
-    "bucket": "<bucket name>",
-    "buffer_size": "1024MB",
-    "region": "eu-central-1",
-    "base_path": "<path in bucket>",
-    "client": "default",
-    "server_side_encryption" : "false",
-    "compress" : "false"
+  "transient": {
+  "cluster.routing.allocation.disk.watermark.flood_stage" : "99%",
+  "cluster.routing.allocation.disk.watermark.high" : "97%",
+  "cluster.routing.allocation.disk.watermark.low" : "95%"
   }
 }'
 
-#Create snapshot on s3
-####
-curl PUT http://127.0.0.1:9200/_snapshot/<name of s3 repo>/<SNAPSHOT NAME>?wait_for_completion=false
-
-#Restore snapshot from s3
-####
-curl -XPOST 'http://127.0.0.1:9200/_snapshot/<name of s3 repo>/<SNAPSHOT NAME>/_restore?pretty'
-
-#Create Index
-####
-curl -XPUT http://127.0.0.1:9200/<Index name> -H 'Content-Type: application/json' -d '
+curl -XPUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
 {
-    "settings" : {
-        "number_of_shards" : 1,
-        "number_of_replicas" : 1
-    }
+  "transient": {
+    "cluster.routing.allocation.disk.watermark.flood_stage" : "99%"
+  }
 }'
