@@ -1,0 +1,17 @@
+# Вывести список всех пользователей:
+  show user;
+
+# Более подробная информация о пользователях:
+  select * from system.users;
+
+# Создание пользователя:
+CREATE USER test IDENTIFIED WITH sha256_password BY 'test1111' HOST IP '192.168.0.0/16';
+
+#Удаление пользователя
+  DROP USER test;
+
+# Добавление прав:
+  GRANT ALL ON *.* TO test;
+
+# Подключение удаленной базы к clickhouse
+  CREATE DATABASE local_db ENGINE = MySQL('server:port', 'remorte_db', 'user', 'password');
